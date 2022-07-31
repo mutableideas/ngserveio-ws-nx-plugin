@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "common-model",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "x-prompt": "Model Name?",
+      "description": "Model Name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "domain": {
+      "type": "string",
+      "x-prompt": "Domain?",
+      "description": "Model Name",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "inputs": {
+      "type": "string",
+      "x-prompt": "Model Properties?",
+      "description": "The model properties to be generated.",
+      "$default": {
+        "$source": "argv",
+        "index": 2
+      }
+    }
+  },
+  "required": ["name", "domain"]
+}

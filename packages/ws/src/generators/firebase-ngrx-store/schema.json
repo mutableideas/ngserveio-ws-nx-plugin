@@ -1,0 +1,27 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "firebase-ngrx-store",
+  "type": "object",
+  "properties": {
+    "collection": {
+      "type": "string",
+      "x-prompt": "Firebase Collection Name",
+      "description": "The Firebase Firestore Collection Name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "domain": {
+      "type": "string",
+      "x-prompt": "Domain",
+      "description": "The Domain to add the NgRx Store",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    }
+  },
+  "required": ["collection", "domain"]
+}

@@ -1,0 +1,17 @@
+<ng-serve-form [formGroup]="<%=propertyName%>Form" (cancel)="cancelHandler()">
+  <% for (const formControl of formControls) {
+    if (formControl.type === 't' || formControl.type === 'dd') {%>
+      <ng-serve-form-field [control]="<%=formControl.inputName%>" label="<%=formControl.inputName%>">
+        <% if (formControl.type === 't') { %><input type="text" matInput formControlName="<%=formControl.inputName%>" /><% } %>
+        <% if (formControl.type === 'dd') { %>
+        <mat-select type="text" formControlName="<%=formControl.inputName%>">
+          <mat-option>-- select --</mat-option>
+          <mat-option *ngFor="let option of <%=formControl.inputName%>Options" [value]="option.value">
+            {{ option.label }}
+          </mat-option>
+        </mat-select>
+        <% } %>
+      </ng-serve-form-field>
+    <%}%>
+  <%}%>
+</ng-serve-form>

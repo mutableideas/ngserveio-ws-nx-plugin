@@ -15,7 +15,7 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-starter/ng-starter": ["packages/ng-starter/src/index.ts"]
+      "@ngserveio/ws": ["packages/ws/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "name": "ng-starter",
+  "version": "0.0.1",
+  "generators": {
+    "api-app": {
+      "factory": "./src/generators/api-app/index",
+      "schema": "./src/generators/api-app/schema.json",
+      "description": "Creates a NestJS application under the `apps/{domain}/{name}"
+    },
+    "api-feature": {
+      "factory": "./src/generators/api-feature/index",
+      "schema": "./src/generators/api-feature/schema.json",
+      "description": "Creates a NestJS feature library for an api under `libs/{domain}/api/{name}"
+    },
+    "app-feature": {
+      "factory": "./src/generators/api-feature/index",
+      "schema": "./src/generators/api-feature/schema.json",
+      "description": ""
+    },
+    "client-app": {
+      "factory": "./src/generators/client-app/index",
+      "schema": "./src/generators/client-app/schema.json",
+      "description": "Creates a Angular app under apps/{domain}/{name}-app"
+    },
+    "common-domain-lib": {
+      "factory": "./src/generators/common-domain-lib/index",
+      "schema": "./src/generators/common-domain-lib/schema.json",
+      "description": "Creates a common node library that can be shared safely between Angular and Nest Applications libs/{domain}/common"
+    },
+    "common-model": {
+      "factory": "./src/generators/common-domain-lib/index",
+      "schema": "./src/generators/common-domain-lib/schema.json",
+      "description": "Creates common models in the libs/{domain}/common/src/{models | validators} folders"
+    },
+    "data-access": {
+      "factory": "./src/generators/data-access/index",
+      "schema": "./src/generators/data-access/schema.json",
+      "description": "Creates an Angular data-access project under a domain."
+    },
+    "domain": {
+      "factory": "./src/generators/domain/index",
+      "schema": "./src/generators/domain/schema.json",
+      "description": "Creates a client-app, client-api-app, common, and data-access projects"
+    },
+    "firebase-ngrx-store": {
+      "factory": "./src/generators/firebase-ngrx-store/index",
+      "schema": "./src/generators/firebase-ngrx-store/schema.json",
+      "description": "Creates an firebase-store-store connecting to Firebase for realtime communication"
+    },
+    "material-form": {
+      "factory": "./src/generators/material-form/index",
+      "schema": "./src/generators/material-form/schema.json",
+      "description": "Generates a material form component and any models defined via the inputs"
+    }
+  }
+}

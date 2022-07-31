@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "material-form",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "x-prompt": "Form Name? (Appending form does not need to be included)",
+      "description": "The name of the model for creating the form",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    },
+    "project": {
+      "type": "string",
+      "description": "The name of the project from the angular.json",
+      "x-prompt": "Project Name? (angular.json)",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    },
+    "inputs": {
+      "type": "string",
+      "x-prompt": "Controls? (comma separated list of controls e.g. firstName:t,lastName:t, see description for further guidance)",
+      "description": "A common separated list for controls to be created.  A colon between determines the type of control to be created.  t = textbox, c = checkbox, dd = dropwdown, r = radio.  e.g. firstName:t,lastName:t,subscribe:c,preferences:dd",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
+    }
+  },
+  "required": ["name", "project", "inputs"]
+}

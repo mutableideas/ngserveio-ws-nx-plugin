@@ -12,5 +12,5 @@
     }
   },
   "tags": [],
-  "implicitDependencies": ["ng-starter"]
+  "implicitDependencies": ["ngserveio-ws"]
 }

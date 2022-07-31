@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/schema",
+  "cli": "nx",
+  "$id": "common-domain-lib",
+  "type": "object",
+  "properties": {
+    "domain": {
+      "type": "string",
+      "x-prompt": "Domain?",
+      "description": "Domain name",
+      "$default": {
+        "$source": "argv",
+        "index": 0
+      }
+    }
+  },
+  "required": ["domain"]
+}
