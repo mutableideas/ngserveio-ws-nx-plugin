@@ -9,6 +9,7 @@
       "options": {
         "outputPath": "dist/packages/ws",
         "main": "packages/ws/src/index.ts",
+        "buildableProjectDepsInPackageJsonType": "dependencies",
         "tsConfig": "packages/ws/tsconfig.lib.json",
         "assets": [
           "packages/ws/*.md",
