@@ -1,4 +1,4 @@
-import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, names, Tree } from '@nrwl/devkit';
+import { formatFiles, generateFiles, joinPathFragments, names, Tree } from '@nrwl/devkit';
 import { join } from 'path';
 import { SourceFile, ts } from 'ts-morph';
 import { FileUpdates, getCommonImportPath, getProject, parseControls, parseProjectTags, updateSourceFiles } from '../utilities';
@@ -30,6 +30,7 @@ export default async function (tree: Tree, schema: MaterialFormSchema) {
     {
       ...names(schema.name),
       selector: project['prefix'],
+      template: '', // typescript files appended with __template__ needs to be removed
       commonProjectImportPath: getCommonImportPath(tags.domain),
       formControls,
       controlTypes: formControls.reduce((values, control) => {

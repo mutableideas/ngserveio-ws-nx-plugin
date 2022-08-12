@@ -35,6 +35,7 @@ export default async function commonModelGenerator(tree: Tree, schema: ICommonMo
     commonProjectSrcPath,
     {
       ...modelNames,
+      template: '',
       formControls: schema.inputs?.trim()?.length > 0 ? parseControls(schema.inputs) : []
     }
   );

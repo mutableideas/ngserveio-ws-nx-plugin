@@ -6,6 +6,7 @@
   "properties": {
     "name": {
       "type": "string",
+      "x-prompt": "Name?",
       "description": "Library name",
       "$default": {
         "$source": "argv",

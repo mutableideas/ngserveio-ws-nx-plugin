@@ -14,9 +14,9 @@
       "description": "Creates a NestJS feature library for an api under `libs/{domain}/api/{name}"
     },
     "app-feature": {
-      "factory": "./src/generators/api-feature/index",
-      "schema": "./src/generators/api-feature/schema.json",
-      "description": ""
+      "factory": "./src/generators/app-feature/index",
+      "schema": "./src/generators/app-feature/schema.json",
+      "description": "Creates an Angular feature under `lib/{domain}/ui/{name}-feature"
     },
     "client-app": {
       "factory": "./src/generators/client-app/index",
