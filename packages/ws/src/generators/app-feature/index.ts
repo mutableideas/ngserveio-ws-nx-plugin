@@ -18,7 +18,7 @@ export default async function appFeatureGenerator(tree: Tree, schema: IAppFeatur
     prefix: domainProject.domain.fileName,
     directory: `${domainProject.domain.fileName}/ui`,
     importPath: `@${domainProject.domain.fileName}/ui-${projectName}`,
-    tags: setTags(domainProject.domain.fileName, 'ng', 'api-feature'),
+    tags: setTags(domainProject.domain.fileName, 'ng', 'ng-feature'),
     standaloneConfig: true
   });
 
