@@ -5,7 +5,7 @@ import { ModeledFormGroup } from '@ngserveio/form-services';
 import { <%=className%>Model, <%=propertyName%>Validator } from '<%=commonProjectImportPath%>';
 
 @Component({
-  selector: '<%=selector%>-<%=name%>-form',
+  selector: '<%=selector%>-<%=fileName%>-form',
   templateUrl: './<%=fileName%>-form.component.html',
   styleUrls: ['./<%=fileName%>-form.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,16 +1,15 @@
-import { formatFiles, generateFiles, installPackagesTask, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import { formatFiles, generateFiles, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
 import * as path from 'path';
-import { ParameteredNodeStructure, SourceFile, ts, TypeReferenceNode } from 'ts-morph';
+import { SourceFile, ts } from 'ts-morph';
+import CommonModelGenerator from '../common-model';
 import { AngularGeneratorUtil, createImportClassDeclaration, FileUpdates, getProject, updateSourceFiles } from '../utilities';
 import { IFirebaseNgrxStoreSchema } from './firebase-ngrx-store-schema.interface';
-import CommonModelGenerator from '../common-model';
-
 
 // https://nx.dev/generators/modifying-files#ast-manipulation
 export default async function (tree: Tree, schema: IFirebaseNgrxStoreSchema) {
   const domainNames = names(schema.domain);
   
-  let project: ProjectConfiguration = getProject(tree, `${domainNames.fileName}-ui-data-access`);
+  const project: ProjectConfiguration = getProject(tree, `${domainNames.fileName}-ui-data-access`);
 
   const collectionNames = names(schema.collection);
   const storeFilePath = path.join(project.sourceRoot, 'lib');
@@ -22,6 +21,7 @@ export default async function (tree: Tree, schema: IFirebaseNgrxStoreSchema) {
     storeFilePath,
     {
       ...collectionNames,
+      template: '',
       domain: domainNames.fileName,
       domainProject: `${domainNames.fileName}/common`
     }
@@ -41,7 +41,10 @@ export default async function (tree: Tree, schema: IFirebaseNgrxStoreSchema) {
       tree,
       joinPathFragments(__dirname, './files/data-access-module/config'),
       storeFilePath,
-      domainNames
+      {
+        ...domainNames,
+        template: ''
+      }
     );
   }
 

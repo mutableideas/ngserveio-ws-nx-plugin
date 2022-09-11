@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 <% if (controlTypes.has('dd')) {%>import { MatSelectModule } from '@angular/material/select';<%}%>
 <% if (controlTypes.has('c')) {%>import { MatCheckboxModule } from '@angular/material/checkbox';<%}%>
 <% if (controlTypes.has('r')) {%>import { MatRadioModule } from '@angular/material/radio';<%}%>
-import { NgServeMaterialFormsModule } from '@ngserveio/forms';
+import { NgServeMaterialFormsModule } from '@ngserveio/material-forms';
 import { <%=className%>FormComponent } from './<%=fileName%>-form.component';
 
 
