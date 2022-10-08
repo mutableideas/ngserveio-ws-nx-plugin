@@ -12,6 +12,16 @@
         "$source": "argv",
         "index": 0
       }
+    },
+    "name": {
+      "type": "string",
+      "x-prompt": "Name?",
+      "description": "Common Project Name",
+      "default": "common",
+      "$default": {
+        "$source": "argv",
+        "index": 1
+      }
     }
   },
   "required": ["domain"]

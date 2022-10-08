@@ -27,3 +27,12 @@ export function getUiFeatureLibraryName(project: IDomainProject, ): string {
   return getFeatureLibraryName(project, 'ui');
 }
 
+export function domainDirectory(domain: string): string {
+  return domain.split('/').map(path => {
+    return names(path).fileName;
+  }).join('/');
+}
+
+export function dasherize(name: string): string {
+  return name.trim().replace(/\s/g, '-').replace(/[/]+/g, '-');
+}
