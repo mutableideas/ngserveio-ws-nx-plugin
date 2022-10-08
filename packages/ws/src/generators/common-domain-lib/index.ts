@@ -1,9 +1,10 @@
 import { Tree, formatFiles } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/workspace/generators';
-import { getCommonImportPath, getCommonProjectByDomain, getDomainProjectNames, setTags } from '../utilities';
-import { IDomainSchema } from './common-schema.interface';
+import { IDomainProject } from '../models';
+import { domainDirectory, getCommonImportPath, getCommonProjectByDomain, getDomainProjectNames, setTags } from '../utilities';
 
-export default async function commonDomainLibGenerator(tree: Tree, schema: IDomainSchema) {
+export default async function commonDomainLibGenerator(tree: Tree, schema: IDomainProject) {
+  const directory = domainDirectory(schema.domain);
   const { domain } = getDomainProjectNames(schema);
   let projectConfiguration = getCommonProjectByDomain(tree, domain.fileName);
 
@@ -15,7 +16,7 @@ export default async function commonDomainLibGenerator(tree: Tree, schema: IDoma
 
   await libraryGenerator(tree, {
     name: 'common',
-    directory: `${domain.fileName}`,
+    directory,
     importPath: getCommonImportPath(domain.fileName),
     tags: setTags(domain.fileName, 'any', 'lib'),
     standaloneConfig: true
