@@ -32,3 +32,7 @@ export function domainDirectory(domain: string): string {
     return names(path).fileName;
   }).join('/');
 }
+
+export function dasherize(name: string): string {
+  return name.trim().replace(/\s/g, '-').replace(/[/]+/g, '-');
+}

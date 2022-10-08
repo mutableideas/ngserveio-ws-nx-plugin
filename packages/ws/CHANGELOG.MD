@@ -6,3 +6,6 @@
 
 ### 0.0.5
 - Templates were not being generated for typescript files
+
+### 0.0.6
+- `common-domain-lib` if the `domain` input includes a forward slash, it adds to the directory structure provided.
