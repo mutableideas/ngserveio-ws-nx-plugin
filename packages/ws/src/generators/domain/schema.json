@@ -21,6 +21,16 @@
         "$source": "argv",
         "index": 1
       }
+    },
+    "createApps": {
+      "type": "boolean",
+      "x-prompt": "Create Apps?",
+      "description": "Create the Api and Angular applications.",
+      "default": true,
+      "$default": {
+        "$source": "argv",
+        "$index": 2
+      }
     }
   },
   "required": ["name", "domain"]

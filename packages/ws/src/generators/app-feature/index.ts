@@ -2,11 +2,12 @@ import { Tree, formatFiles } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/angular/generators';
 import { IAppFeatureSchema } from './app-feature-schema.interface';
 import { IDomainProjectNames } from '../models';
-import { getDomainProjectNames, setTags } from '../utilities';
+import { dasherize, domainDirectory, getDomainProjectNames, setTags } from '../utilities';
 import dataAccessGenerator from '../data-access';
 import commonDomainLibGenerator from '../common-domain-lib';
 
 export default async function appFeatureGenerator(tree: Tree, schema: IAppFeatureSchema) {
+  const directory = domainDirectory(schema.domain);
   const domainProject: IDomainProjectNames = getDomainProjectNames(schema);
   const projectName = `${domainProject.name.fileName}-feature`;
 
@@ -15,8 +16,8 @@ export default async function appFeatureGenerator(tree: Tree, schema: IAppFeatur
 
   await libraryGenerator(tree, {
     name: projectName,
-    prefix: domainProject.domain.fileName,
-    directory: `${domainProject.domain.fileName}/ui`,
+    prefix: dasherize(domainProject.domain.fileName),
+    directory: `${directory}/ui`,
     importPath: `@${domainProject.domain.fileName}/ui-${projectName}`,
     tags: setTags(domainProject.domain.fileName, 'ng', 'ng-feature'),
     standaloneConfig: true

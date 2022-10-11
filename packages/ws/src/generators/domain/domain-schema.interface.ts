@@ -1,3 +1,5 @@
 import { IDomainProject } from '../models';
 
-export interface IDomainSchema extends IDomainProject { }
+export interface IDomainSchema extends IDomainProject {
+  createApps: boolean;
+}

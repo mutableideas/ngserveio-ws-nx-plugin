@@ -1,9 +1,10 @@
 import { Tree, formatFiles, names } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/angular/generators';
 import { IDataAccessSchema } from './data-access-schema.inteface';
-import { getDataAccessProjectByDomain, setTags } from '../utilities';
+import { domainDirectory, getDataAccessProjectByDomain, setTags } from '../utilities';
 
 export default async function dataAccessGenerator(tree: Tree, schema: IDataAccessSchema) {
+  const directory = domainDirectory(schema.domain);
   const domain = names(schema.domain);
   const dataAccessProject = getDataAccessProjectByDomain(tree, domain.fileName);
 
@@ -15,7 +16,7 @@ export default async function dataAccessGenerator(tree: Tree, schema: IDataAcces
 
   await libraryGenerator(tree, {
     name: 'data-access',
-    directory: `${domain.fileName}/ui`,
+    directory: `${directory}/ui`,
     importPath: `@${domain.fileName}/ui-data-access`,
     tags: setTags(domain.fileName, 'ng', 'ng-data-access'),
     standaloneConfig: true

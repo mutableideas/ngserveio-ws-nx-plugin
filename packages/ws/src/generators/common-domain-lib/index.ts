@@ -5,7 +5,7 @@ import { dasherize, domainDirectory, getCommonImportPath, getCommonProjectByDoma
 
 export default async function commonDomainLibGenerator(tree: Tree, schema: IDomainProject) {
   const directory = domainDirectory(schema.domain);
-  const { domain, name } = getDomainProjectNames(schema);
+  const { domain } = getDomainProjectNames(schema);
   let projectConfiguration = getCommonProjectByDomain(tree, domain.fileName);
 
   // Library has already been created
@@ -15,7 +15,7 @@ export default async function commonDomainLibGenerator(tree: Tree, schema: IDoma
   }
 
   await libraryGenerator(tree, {
-    name: name.fileName,
+    name: schema.name || 'common',
     directory,
     importPath: getCommonImportPath(domain.fileName),
     tags: setTags(domain.fileName, 'any', 'lib'),
