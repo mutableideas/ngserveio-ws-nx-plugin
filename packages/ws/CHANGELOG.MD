@@ -9,3 +9,7 @@
 
 ### 0.0.6
 - `common-domain-lib` if the `domain` input includes a forward slash, it adds to the directory structure provided.
+
+
+### 0.0.7
+- All generators listed determine folder by the domain / sub-domain provided `api-app`, `api-feature`, `api-app`, `app-feature`, `client-app`, `data-access`.
