@@ -15,7 +15,7 @@ export default async function commonDomainLibGenerator(tree: Tree, schema: IDoma
   }
 
   await libraryGenerator(tree, {
-    name: schema.name || 'common',
+    name: 'common',
     directory,
     importPath: getCommonImportPath(domain.fileName),
     tags: setTags(domain.fileName, 'any', 'lib'),

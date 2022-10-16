@@ -13,3 +13,6 @@
 
 ### 0.0.7
 - All generators listed determine folder by the domain / sub-domain provided `api-app`, `api-feature`, `api-app`, `app-feature`, `client-app`, `data-access`.
+
+### 0.0.8
+- Fixed issue for common-domain-lib being created when `domain` generator is run
