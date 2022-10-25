@@ -2,6 +2,7 @@ import { ProjectConfiguration, Tree, getProjects, names } from '@nrwl/devkit';
 import { ControlType } from '../material-form/control-type.interface';
 import { LibraryType, PlatformType, Tags } from '../models';
 import { buildRelativePath } from '@schematics/angular/utility/find-module';
+import { dasherize } from './project-names';
 
 export * from './ts-morph-utilties';
 export * from './project-names';
@@ -21,8 +22,8 @@ export function getCommonProjectByDomain(tree: Tree, domain: string): ProjectCon
   return getProject(tree, commonProjectName);
 }
 
-export function getDataAccessProjectByDomain(tree:Tree, domain: string): ProjectConfiguration {
-  const dataAccessProjectName = `${domain}-ui-data-access`;
+export function getDataAccessProjectByDomain(tree:Tree, domain: string, type: 'api' | 'ui'): ProjectConfiguration {
+  const dataAccessProjectName = `${domain}-${type}-data-access`;
   return getProject(tree, dataAccessProjectName);
 }
 
@@ -37,7 +38,7 @@ export function parseProjectTags(projectTags: string[]): Tags {
 }
 
 export function getCommonImportPath(domain: string): string {
-  return `@${domain}/common`;
+  return `@${dasherize(domain)}/common`;
 }
 
 export function getProject(tree: Tree, projectName: string): ProjectConfiguration {
