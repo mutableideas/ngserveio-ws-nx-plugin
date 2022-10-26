@@ -16,3 +16,8 @@
 
 ### 0.0.8
 - Fixed issue for common-domain-lib being created when `domain` generator is run
+
+### 0.1.0
+
+- The `domain` generator will no longer create an `api-feature`.  It will generate several libraries under a specific domain.  See the ReadME for details.
+- `data-access` generator can now choose between a `ui` or `api` type library

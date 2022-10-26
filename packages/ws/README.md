@@ -7,11 +7,11 @@ The purpose of the library is to quickly scaffold and create Angular Application
 
 ## Building
 
-Run `nx build ng-starter` to build the library.
+Run `nx build ngserveio-ws` to build the library.
 
 ## Running unit tests
 
-Run `nx test ng-starter` to execute the unit tests via [Jest](https://jestjs.io).
+Run `nx test ngserveio-ws` to execute the unit tests via [Jest](https://jestjs.io).
 
 ## Generators
 | Name                  | Parameters                  | Description                                                                                                                                                                                                              |
