@@ -11,7 +11,10 @@ export default async function appFeatureGenerator(tree: Tree, schema: IAppFeatur
   const domainProject: IDomainProjectNames = getDomainProjectNames(schema);
   const projectName = `${domainProject.name.fileName}-feature`;
 
-  await dataAccessGenerator(tree, schema);
+  await dataAccessGenerator(tree, {
+    ...schema,
+    type: 'ui'
+  });
   await commonDomainLibGenerator(tree, schema);
 
   await libraryGenerator(tree, {

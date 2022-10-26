@@ -1,6 +1,5 @@
 import { formatFiles, names, Tree } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/nest';
-import { LibraryGeneratorOptions } from '@nrwl/nest/src/generators/library/schema';
 import { IDomainProjectNames } from '../models';
 import { addImportDeclaration, getDomainProjectNames, getProjectHighLevelModule, setTags, updateSourceFiles, AngularGeneratorUtil, domainDirectory } from '../utilities';
 import { IApiFeatureSchema } from './api-feature-schema.interface';
@@ -10,15 +9,13 @@ export default async function apiFeatureGenerator(tree: Tree, schema: IApiFeatur
   const domainProject: IDomainProjectNames = getDomainProjectNames(schema);
   const projectName = `${domainProject.name.fileName}-feature`;
 
-  const featureOptions =  {
+  await libraryGenerator(tree, {
     name: projectName,
     directory: `${directory}/api`,
     importPath: `@${domainProject.domain.fileName}/api-${projectName}`,
     tags: setTags(domainProject.domain.name, 'nest', 'api-feature'),
     standaloneConfig: true
-  } as LibraryGeneratorOptions;
-
-  await libraryGenerator(tree, featureOptions);
+  });
 
   if (schema.parentProject) {
     const modulePath = getProjectHighLevelModule(tree, schema.parentProject);
