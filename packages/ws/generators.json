@@ -29,8 +29,8 @@
       "description": "Creates a common node library that can be shared safely between Angular and Nest Applications libs/{domain}/common"
     },
     "common-model": {
-      "factory": "./src/generators/common-domain-lib/index",
-      "schema": "./src/generators/common-domain-lib/schema.json",
+      "factory": "./src/generators/common-model/index",
+      "schema": "./src/generators/common-model/schema.json",
       "description": "Creates common models in the libs/{domain}/common/src/{models | validators} folders"
     },
     "data-access": {
