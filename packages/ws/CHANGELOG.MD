@@ -21,3 +21,7 @@
 
 - The `domain` generator will no longer create an `api-feature`.  It will generate several libraries under a specific domain.  See the ReadME for details.
 - `data-access` generator can now choose between a `ui` or `api` type library
+
+### 0.2.0
+
+- Added the `common-model` generator to create common models in the validators and models directory of a `common` library.
