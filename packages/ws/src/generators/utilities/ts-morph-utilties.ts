@@ -1,6 +1,8 @@
 import { Tree } from '@nrwl/devkit';
 import { ClassDeclaration, ImportDeclaration, Project, PropertyAssignment, SourceFile, ts } from 'ts-morph';
 
+// TO DO: DOCUMENTATION
+
 export type UpdateFileContent = (sourceFile: SourceFile) => void;
 export type FileUpdates = Record<string, UpdateFileContent>;
 export type UpdateFileDelegate = (tree: Tree, project: Project) => void;
@@ -93,7 +95,7 @@ export const createImportClassDeclaration = (sourceFile: SourceFile, relativeImp
 }
 
 export class AngularGeneratorUtil {
-  static NG_MODULE: string = 'NgModule';
+  public static NG_MODULE = 'NgModule';
 
   public static findNgModuleClass(sourceFile: SourceFile): ClassDeclaration {
     return sourceFile.getDescendantsOfKind(ts.SyntaxKind.ClassDeclaration).find(
