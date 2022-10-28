@@ -8,3 +8,5 @@ export * from './data-access';
 export * from './domain';
 export * from './firebase-ngrx-store';
 export * from './material-form';
+export * from './utilities';
+export * from './models';
