@@ -5,7 +5,7 @@ import { FileUpdates, getCommonImportPath, getProject, parseControls, parseProje
 import { MaterialFormSchema } from './material-form-schema';
 import CommonFileGenerator from '../common-model'
 
-export default async function (tree: Tree, schema: MaterialFormSchema) {
+export default async function materialFormGenerator(tree: Tree, schema: MaterialFormSchema) {
   const modelNames = names(schema.name);
 
   // 1. Determine where the project lives

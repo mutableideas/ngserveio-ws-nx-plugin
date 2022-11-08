@@ -1,7 +1,7 @@
 import { Tree, formatFiles } from '@nrwl/devkit';
 import { libraryGenerator } from '@nrwl/workspace/generators';
 import { IDomainProject } from '../models';
-import { dasherize, domainDirectory, getCommonImportPath, getCommonProjectByDomain, getDomainProjectNames, setTags } from '../utilities';
+import { dasherize, domainDirectory, getCommonImportPath, getCommonProjectByDomain, getDomainProjectImportPath, getDomainProjectNames, setTags } from '../utilities';
 
 export default async function commonDomainLibGenerator(tree: Tree, schema: IDomainProject) {
   const directory = domainDirectory(schema.domain);
@@ -17,7 +17,7 @@ export default async function commonDomainLibGenerator(tree: Tree, schema: IDoma
   await libraryGenerator(tree, {
     name: 'common',
     directory,
-    importPath: getCommonImportPath(domain.fileName),
+    importPath: getDomainProjectImportPath(schema.domain, 'lib', 'common'),
     tags: setTags(domain.fileName, 'any', 'lib'),
     standaloneConfig: true
   });

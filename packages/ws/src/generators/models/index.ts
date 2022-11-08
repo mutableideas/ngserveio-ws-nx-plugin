@@ -17,7 +17,17 @@ export interface IDomainProjectNames {
 }
 
 export type PlatformType = 'nest' | 'ng' | 'any';
-export type LibraryType = 'ng-app' | 'ng-feature' | 'ng-data-access' | 'ng-library' | 'api-app' | 'api-feature' | 'api-library' | 'lib' | 'api-data-access' | 'api-domain-application' | 'api-domain-services' | 'api-domain-config';
+export type LibraryType = 'ng-app' | 
+  'ng-feature' | 
+  'ng-data-access' |
+  'api-app' |
+  'api-feature' |
+  'lib' |
+  'utilities' |
+  'api-domain-data-access' |
+  'api-domain-application' |
+  'api-domain-services' |
+  'api-domain-config';
 
 export type Tags = {
   domain: string;

@@ -10,8 +10,8 @@
   "private": true,
   "dependencies": {
     "@swc/helpers": "~0.3.3",
-    "tslib": "^2.3.0",
-    "ts-morph": "^15.1.0"
+    "ts-morph": "^15.1.0",
+    "tslib": "^2.3.0"
   },
   "devDependencies": {
     "@nrwl/angular": "^14.5.1",
