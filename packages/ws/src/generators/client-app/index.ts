@@ -1,13 +1,13 @@
 import { applicationGenerator } from '@nrwl/angular/generators';
 import { formatFiles, generateFiles, joinPathFragments, names, Tree, updateProjectConfiguration } from '@nrwl/devkit';
+import { IDomainProject } from '../models';
 import { addImportDeclaration, domainDirectory, getProject, getProjectHighLevelModule, setTags, updateSourceFiles } from '../utilities';
-import { IClientAppSchema } from './client-app-schema.interface';
 
-export default async function appGenerator(tree: Tree, schema: IClientAppSchema) {
+export default async function appGenerator(tree: Tree, schema: IDomainProject) {
   const directory = domainDirectory(schema.domain);
   const projectNames = names(schema.name)
   const domainNames = names(schema.domain);
-  const projectName = `${projectNames.fileName}-app`;
+  const projectName = `${projectNames.fileName}-ui`;
   const appProjectName = [domainNames.name, projectName].join('-');
 
   await applicationGenerator(tree, {

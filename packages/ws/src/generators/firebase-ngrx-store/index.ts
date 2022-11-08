@@ -2,11 +2,11 @@ import { formatFiles, generateFiles, joinPathFragments, names, ProjectConfigurat
 import * as path from 'path';
 import { SourceFile, ts } from 'ts-morph';
 import CommonModelGenerator from '../common-model';
-import { AngularGeneratorUtil, createImportClassDeclaration, FileUpdates, getProject, updateSourceFiles } from '../utilities';
+import { ModuleGeneratorUtil, createImportClassDeclaration, FileUpdates, getProject, updateSourceFiles } from '../utilities';
 import { IFirebaseNgrxStoreSchema } from './firebase-ngrx-store-schema.interface';
 
 // https://nx.dev/generators/modifying-files#ast-manipulation
-export default async function (tree: Tree, schema: IFirebaseNgrxStoreSchema) {
+export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebaseNgrxStoreSchema) {
   const domainNames = names(schema.domain);
   
   const project: ProjectConfiguration = getProject(tree, `${domainNames.fileName}-ui-data-access`);
@@ -54,7 +54,7 @@ export default async function (tree: Tree, schema: IFirebaseNgrxStoreSchema) {
 
   const updates: FileUpdates = {
     [storeModuleFilePath]: (sourceFile: SourceFile) => {
-      AngularGeneratorUtil.addToNgModuleDecorator(sourceFile, {
+      ModuleGeneratorUtil.addToModuleDecorator(sourceFile, {
         imports: {
           [`./${collectionNames.fileName}-store`]: [
             `${collectionNames.className}StoreModule`
@@ -84,7 +84,7 @@ export default async function (tree: Tree, schema: IFirebaseNgrxStoreSchema) {
         'ModuleWithProviders'
       ]);
 
-      const ngClassDeclaration = AngularGeneratorUtil.findNgModuleClass(sourceFile);
+      const ngClassDeclaration = ModuleGeneratorUtil.findModuleClass(sourceFile);
       let methodDeclaration = ngClassDeclaration.getFirstDescendantByKind(ts.SyntaxKind.MethodDeclaration);
 
       if (methodDeclaration?.getName() !== 'forRoot') {

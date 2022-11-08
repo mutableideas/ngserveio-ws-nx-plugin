@@ -94,23 +94,21 @@ export const createImportClassDeclaration = (sourceFile: SourceFile, relativeImp
   importDeclaration.addNamedImports(addedImports)
 }
 
-export class AngularGeneratorUtil {
-  public static NG_MODULE = 'NgModule';
-
-  public static findNgModuleClass(sourceFile: SourceFile): ClassDeclaration {
+export class ModuleGeneratorUtil {
+  public static findModuleClass(sourceFile: SourceFile, decorator: 'NgModule' | 'Module' = 'NgModule'): ClassDeclaration {
     return sourceFile.getDescendantsOfKind(ts.SyntaxKind.ClassDeclaration).find(
-      p => p.getDecorator(AngularGeneratorUtil.NG_MODULE)
+      p => p.getDecorator(decorator)
     );
   }
 
-  public static addToNgModuleDecorator(sourceFile: SourceFile, decoratorProperties: NgModuleDecoratorProperties): void {
+  public static addToModuleDecorator(sourceFile: SourceFile, decoratorProperties: NgModuleDecoratorProperties, moduleDecorator: 'NgModule' | 'Module' = 'NgModule'): void {
     // Find The Angular Decorator
     const decorator = sourceFile.getDescendantsOfKind(ts.SyntaxKind.Decorator)?.find(
-      p => p.getName() === AngularGeneratorUtil.NG_MODULE
+      p => p.getName() === moduleDecorator
     );
 
     if (!decorator) {
-      throw `NgModule not found in source file: ${sourceFile.getFilePath()}.`;
+      throw `${moduleDecorator} not found in source file: ${sourceFile.getFilePath()}.`;
     }
 
     // The object contained within the @NgModule({ /* THIS OBJECT */ });

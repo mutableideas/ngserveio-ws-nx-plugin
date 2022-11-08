@@ -18,13 +18,23 @@ export function parseControls(inputs: string): ControlType[] {
 }
 
 export function getCommonProjectByDomain(tree: Tree, domain: string): ProjectConfiguration {
-  const commonProjectName = `${domain}-common`;
+  const commonProjectName = `${dasherize(domain)}-common`;
   return getProject(tree, commonProjectName);
 }
 
 export function getDataAccessProjectByDomain(tree:Tree, domain: string, type: 'api' | 'ui'): ProjectConfiguration {
-  const dataAccessProjectName = `${domain}-${type}-data-access`;
+  const dataAccessProjectName = `${dasherize(domain)}-${type}-data-access`;
   return getProject(tree, dataAccessProjectName);
+}
+
+export function getServicesProjectByDomain(tree: Tree, domain: string): ProjectConfiguration {
+  const servicesProjectName = `${dasherize(domain)}-api-services`;
+  return getProject(tree, servicesProjectName);
+}
+
+export function getApplicationProjectByDomain(tree: Tree, domain: string): ProjectConfiguration {
+  const applicationProject = `${dasherize(domain)}-api-application`;
+  return getProject(tree, applicationProject);
 }
 
 export function parseProjectTags(projectTags: string[]): Tags {
@@ -38,7 +48,12 @@ export function parseProjectTags(projectTags: string[]): Tags {
 }
 
 export function getCommonImportPath(domain: string): string {
-  return `@${dasherize(domain)}/common`;
+  if (domain.includes('/')) {
+    const domains = domain.split('/');
+    return `@${domains[0]}/${domains.slice(1).join('-')}-common`;
+  }
+
+  return `@${domain}/common`;
 }
 
 export function getProject(tree: Tree, projectName: string): ProjectConfiguration {

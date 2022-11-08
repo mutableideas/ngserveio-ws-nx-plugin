@@ -1,12 +1,26 @@
-export * from './api-app';
-export * from './api-feature';
-export * from './app-feature';
-export * from './client-app';
-export * from './common-domain-lib';
-export * from './common-model';
-export * from './data-access';
-export * from './domain';
-export * from './firebase-ngrx-store';
-export * from './material-form';
+import apiAppGenerator from './api-app';
+import apiFeatureGenerator from './api-feature';
+import appFeatureGenerator from './app-feature';
+import appGenerator from './client-app';
+import commonDomainLibGenerator from './common-domain-lib';
+import commonModelGenerator from './common-model';
+import dataAccessGenerator from './data-access';
+import domainGenerator from './domain';
+import firebaseNgrxGenerator from './firebase-ngrx-store';
+import materialFormGenerator from './material-form';
+
 export * from './utilities';
 export * from './models';
+
+export {
+  apiAppGenerator,
+  apiFeatureGenerator,
+  appFeatureGenerator,
+  appGenerator,
+  commonDomainLibGenerator,
+  commonModelGenerator,
+  dataAccessGenerator,
+  domainGenerator,
+  firebaseNgrxGenerator,
+  materialFormGenerator
+};
