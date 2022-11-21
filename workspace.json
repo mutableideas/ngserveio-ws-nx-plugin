@@ -2,7 +2,7 @@
   "$schema": "./node_modules/nx/schemas/workspace-schema.json",
   "version": 2,
   "projects": {
-    "ngserveio-ws": "packages/ws",
-    "ng-starter-e2e": "e2e/ng-starter-e2e"
+    "ng-starter-e2e": "e2e/ng-starter-e2e",
+    "ngserveio-ws": "packages/ws"
   }
 }
