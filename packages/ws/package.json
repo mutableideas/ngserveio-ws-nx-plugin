@@ -6,7 +6,7 @@
     "url": "https://ngserve.io"
   },
   "name": "@ngserveio/ws",
-  "version": "1.0.0-alpha",
+  "version": "1.0.1-alpha",
   "main": "src/index.js",
   "generators": "./generators.json",
   "executors": "./executors.json",

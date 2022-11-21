@@ -1,4 +1,5 @@
 {
+  "name": "ngserveio-ws",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "packages/ws/src",
   "projectType": "library",
@@ -50,7 +51,7 @@
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/packages/ws"],
+      "outputs": ["{workspaceRoot}/coverage/packages/ws"],
       "options": {
         "jestConfig": "packages/ws/jest.config.ts",
         "passWithNoTests": true
