@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "domain",
   "type": "object",
   "properties": {
@@ -33,5 +32,8 @@
       }
     }
   },
-  "required": ["name", "domain"]
+  "required": [
+    "name",
+    "domain"
+  ]
 }

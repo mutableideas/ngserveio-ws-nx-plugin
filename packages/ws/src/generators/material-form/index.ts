@@ -1,24 +1,42 @@
-import { formatFiles, generateFiles, joinPathFragments, names, Tree } from '@nrwl/devkit';
+import {
+  formatFiles,
+  generateFiles,
+  joinPathFragments,
+  names,
+  Tree,
+} from '@nx/devkit';
 import { join } from 'path';
 import { SourceFile, ts } from 'ts-morph';
-import { FileUpdates, getCommonImportPath, getProject, parseControls, parseProjectTags, updateSourceFiles } from '../utilities';
+import {
+  FileUpdates,
+  getCommonImportPath,
+  getProject,
+  parseControls,
+  parseProjectTags,
+  updateSourceFiles,
+} from '../utilities';
 import { MaterialFormSchema } from './material-form-schema';
-import CommonFileGenerator from '../common-model'
+import CommonFileGenerator from '../common-model';
 
-export default async function materialFormGenerator(tree: Tree, schema: MaterialFormSchema) {
+export default async function materialFormGenerator(
+  tree: Tree,
+  schema: MaterialFormSchema
+) {
   const modelNames = names(schema.name);
 
   // 1. Determine where the project lives
   const project = getProject(tree, schema.project);
   const projectSrc = join(project.sourceRoot, 'lib');
-  const modulePath = tree.children(projectSrc).find(file => file.endsWith('.module.ts'));
+  const modulePath = tree
+    .children(projectSrc)
+    .find((file) => file.endsWith('.module.ts'));
   const projectModulePath = join(projectSrc, modulePath);
 
   if (!tree.exists(projectModulePath)) {
     throw `${projectModulePath} does not exist!`;
   }
 
-    // 2. Get the tags for the project to get the common project associated with the domain
+  // 2. Get the tags for the project to get the common project associated with the domain
   const tags = parseProjectTags(project.tags);
   const formControls = parseControls(schema.inputs);
 
@@ -39,27 +57,29 @@ export default async function materialFormGenerator(tree: Tree, schema: Material
         }
 
         return values;
-      }, new Set<string>())
+      }, new Set<string>()),
     }
   );
 
   // 5. Update the barreled file in the domain under models to export it
   const updates: FileUpdates = {
     [projectModulePath]: (sourceFile: SourceFile) => {
-      const node = sourceFile.getDescendantsOfKind(
-        ts.SyntaxKind.ArrayLiteralExpression
-      )?.find(node => node.getParent().getKind() === ts.SyntaxKind.PropertyAssignment
-        && node.getParent().getText().includes('imports')
-      );
+      const node = sourceFile
+        .getDescendantsOfKind(ts.SyntaxKind.ArrayLiteralExpression)
+        ?.find(
+          (node) =>
+            node.getParent().getKind() === ts.SyntaxKind.PropertyAssignment &&
+            node.getParent().getText().includes('imports')
+        );
 
       if (node) {
         node.addElement(`${modelNames.className}FormComponentModule`);
         sourceFile.addImportDeclaration({
           moduleSpecifier: `./components/${modelNames.fileName}-form/${modelNames.fileName}-form.module`,
-          namedImports: [`${modelNames.className}FormComponentModule`]
+          namedImports: [`${modelNames.className}FormComponentModule`],
         });
       }
-    }
+    },
   };
 
   updateSourceFiles(tree, updates);
