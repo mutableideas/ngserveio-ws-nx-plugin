@@ -5,11 +5,12 @@
   "sourceRoot": "e2e/ng-starter-e2e/src",
   "targets": {
     "e2e": {
-      "executor": "@nrwl/nx-plugin:e2e",
+      "executor": "@nx/jest:jest",
       "options": {
-        "target": "ng-starter:build",
-        "jestConfig": "e2e/ng-starter-e2e/jest.config.ts"
-      }
+        "jestConfig": "e2e/ng-starter-e2e/jest.config.ts",
+        "runInBand": true
+      },
+      "dependsOn": ["ng-starter:build"]
     }
   },
   "tags": [],

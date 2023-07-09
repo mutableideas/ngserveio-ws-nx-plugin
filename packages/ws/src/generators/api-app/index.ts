@@ -1,10 +1,13 @@
-import { Tree, formatFiles } from '@nrwl/devkit';
-import { applicationGenerator } from '@nrwl/nest';
+import { Tree, formatFiles } from '@nx/devkit';
+import { applicationGenerator } from '@nx/nest';
 import { IDomainProjectNames } from '../models';
 import { domainDirectory, getDomainProjectNames, setTags } from '../utilities';
 import { IApiAppSchema } from './api-app-schema.interface';
 
-export default async function apiAppGenerator(tree: Tree, schema: IApiAppSchema) {
+export default async function apiAppGenerator(
+  tree: Tree,
+  schema: IApiAppSchema
+) {
   const domainProject: IDomainProjectNames = getDomainProjectNames(schema);
   const directory = domainDirectory(schema.domain);
   const projectName = `${domainProject.name.fileName}-api`;
@@ -13,7 +16,7 @@ export default async function apiAppGenerator(tree: Tree, schema: IApiAppSchema)
     name: projectName,
     directory,
     tags: setTags(domainProject.domain.name, 'nest', 'api-app'),
-    standaloneConfig: true
+    standaloneConfig: true,
   });
 
   await formatFiles(tree);

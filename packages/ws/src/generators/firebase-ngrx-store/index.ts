@@ -1,15 +1,34 @@
-import { formatFiles, generateFiles, joinPathFragments, names, ProjectConfiguration, Tree } from '@nrwl/devkit';
+import {
+  formatFiles,
+  generateFiles,
+  joinPathFragments,
+  names,
+  ProjectConfiguration,
+  Tree,
+} from '@nx/devkit';
 import * as path from 'path';
 import { SourceFile, ts } from 'ts-morph';
 import CommonModelGenerator from '../common-model';
-import { ModuleGeneratorUtil, createImportClassDeclaration, FileUpdates, getProject, updateSourceFiles } from '../utilities';
+import {
+  ModuleGeneratorUtil,
+  createImportClassDeclaration,
+  FileUpdates,
+  getProject,
+  updateSourceFiles,
+} from '../utilities';
 import { IFirebaseNgrxStoreSchema } from './firebase-ngrx-store-schema.interface';
 
 // https://nx.dev/generators/modifying-files#ast-manipulation
-export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebaseNgrxStoreSchema) {
+export default async function firebaseNgrxGenerator(
+  tree: Tree,
+  schema: IFirebaseNgrxStoreSchema
+) {
   const domainNames = names(schema.domain);
-  
-  const project: ProjectConfiguration = getProject(tree, `${domainNames.fileName}-ui-data-access`);
+
+  const project: ProjectConfiguration = getProject(
+    tree,
+    `${domainNames.fileName}-ui-data-access`
+  );
 
   const collectionNames = names(schema.collection);
   const storeFilePath = path.join(project.sourceRoot, 'lib');
@@ -23,7 +42,7 @@ export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebas
       ...collectionNames,
       template: '',
       domain: domainNames.fileName,
-      domainProject: `${domainNames.fileName}/common`
+      domainProject: `${domainNames.fileName}/common`,
     }
   );
 
@@ -31,11 +50,14 @@ export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebas
   await CommonModelGenerator(tree, {
     name: schema.collection,
     domain: schema.domain,
-    inputs: ''
+    inputs: '',
   });
 
-  const firebaseConfigPath = path.join(storeFilePath, `firebase-config.interface.ts`);
-  
+  const firebaseConfigPath = path.join(
+    storeFilePath,
+    `firebase-config.interface.ts`
+  );
+
   if (!tree.exists(firebaseConfigPath)) {
     await generateFiles(
       tree,
@@ -43,12 +65,15 @@ export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebas
       storeFilePath,
       {
         ...domainNames,
-        template: ''
+        template: '',
       }
     );
   }
 
-  const storeModuleFilePath = path.join(storeFilePath, `${domainNames.fileName}-ui-data-access.module.ts`);
+  const storeModuleFilePath = path.join(
+    storeFilePath,
+    `${domainNames.fileName}-ui-data-access.module.ts`
+  );
 
   console.log('UPDATE ', storeModuleFilePath);
 
@@ -57,41 +82,56 @@ export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebas
       ModuleGeneratorUtil.addToModuleDecorator(sourceFile, {
         imports: {
           [`./${collectionNames.fileName}-store`]: [
-            `${collectionNames.className}StoreModule`
+            `${collectionNames.className}StoreModule`,
           ],
-          [`@angular/fire/compat`]: [ 'AngularFireModule'],
+          [`@angular/fire/compat`]: ['AngularFireModule'],
           [`@angular/fire/compat/firestore`]: [
-            { moduleName: 'AngularFirestoreModule', importText: 'AngularFirestoreModule.enablePersistence()' }
+            {
+              moduleName: 'AngularFirestoreModule',
+              importText: 'AngularFirestoreModule.enablePersistence()',
+            },
           ],
           [`@ngrx/store-devtools`]: [
-            { moduleName: 'StoreDevtoolsModule', importText: 'StoreDevtoolsModule.instrument({})' }
+            {
+              moduleName: 'StoreDevtoolsModule',
+              importText: 'StoreDevtoolsModule.instrument({})',
+            },
           ],
           [`@ngrx/store`]: [
-            { moduleName: 'StoreModule', importText: 'StoreModule.forRoot({})' }
+            {
+              moduleName: 'StoreModule',
+              importText: 'StoreModule.forRoot({})',
+            },
           ],
           [`@ngrx/effects`]: [
-            { moduleName: `EffectsModule`, importText: 'EffectsModule.forRoot([])' }
-          ]
-        }
+            {
+              moduleName: `EffectsModule`,
+              importText: 'EffectsModule.forRoot([])',
+            },
+          ],
+        },
       });
 
       createImportClassDeclaration(sourceFile, `@angular/fire/compat`, [
         'FIREBASE_APP_NAME',
-        'FIREBASE_OPTIONS'
+        'FIREBASE_OPTIONS',
       ]);
 
       createImportClassDeclaration(sourceFile, '@angular/core', [
-        'ModuleWithProviders'
+        'ModuleWithProviders',
       ]);
 
-      const ngClassDeclaration = ModuleGeneratorUtil.findModuleClass(sourceFile);
-      let methodDeclaration = ngClassDeclaration.getFirstDescendantByKind(ts.SyntaxKind.MethodDeclaration);
+      const ngClassDeclaration =
+        ModuleGeneratorUtil.findModuleClass(sourceFile);
+      let methodDeclaration = ngClassDeclaration.getFirstDescendantByKind(
+        ts.SyntaxKind.MethodDeclaration
+      );
 
       if (methodDeclaration?.getName() !== 'forRoot') {
         // Import the configuration
         sourceFile.addImportDeclaration({
           moduleSpecifier: './firebase-config.interface',
-          namedImports: [`I${domainNames.className}DataAccessConfig`]
+          namedImports: [`I${domainNames.className}DataAccessConfig`],
         });
 
         methodDeclaration = ngClassDeclaration.addMethod({
@@ -101,9 +141,9 @@ export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebas
           parameters: [
             {
               type: `I${domainNames.className}DataAccessConfig`,
-              name: 'config'
-            }
-          ]
+              name: 'config',
+            },
+          ],
         });
 
         // Add a forRoot method to the module for configuration of Firebase
@@ -117,7 +157,7 @@ export default async function firebaseNgrxGenerator(tree: Tree, schema: IFirebas
           };
         `);
       }
-    }
+    },
   };
 
   updateSourceFiles(tree, updates);

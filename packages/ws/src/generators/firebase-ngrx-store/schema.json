@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "firebase-ngrx-store",
   "type": "object",
   "properties": {
@@ -23,5 +22,8 @@
       }
     }
   },
-  "required": ["collection", "domain"]
+  "required": [
+    "collection",
+    "domain"
+  ]
 }

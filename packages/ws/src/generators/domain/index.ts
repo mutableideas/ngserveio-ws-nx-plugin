@@ -1,14 +1,22 @@
-import { formatFiles, Tree } from '@nrwl/devkit';
-import { libraryGenerator } from '@nrwl/nest';
+import { formatFiles, Tree } from '@nx/devkit';
+import { libraryGenerator } from '@nx/nest';
 import apiAppGenerator from '../api-app';
 import appFeatureGenerator from '../app-feature';
 import appGenerator from '../client-app';
 import dataAccessGenerator from '../data-access';
 
-import { domainDirectory, getDomainProjectImportPath, getDomainProjectNames, setTags } from '../utilities';
+import {
+  domainDirectory,
+  getDomainProjectImportPath,
+  getDomainProjectNames,
+  setTags,
+} from '../utilities';
 import { IDomainSchema } from './domain-schema.interface';
 
-export default async function domainGenerator(tree: Tree, schema: IDomainSchema) {
+export default async function domainGenerator(
+  tree: Tree,
+  schema: IDomainSchema
+) {
   const { domain } = getDomainProjectNames(schema);
 
   if (schema.createApps) {
@@ -25,28 +33,34 @@ export default async function domainGenerator(tree: Tree, schema: IDomainSchema)
     directory: `${directory}/api`,
     importPath: getDomainProjectImportPath(schema.domain, 'api-domain-config'),
     tags: setTags(domain.name, 'nest', 'api-domain-config'),
-    standaloneConfig: true
+    standaloneConfig: true,
   });
 
   await dataAccessGenerator(tree, {
     ...schema,
-    type: 'api'
+    type: 'api',
   });
 
   await libraryGenerator(tree, {
     name: 'application',
     directory: `${directory}/api`,
-    importPath: getDomainProjectImportPath(schema.domain, 'api-domain-application'),
+    importPath: getDomainProjectImportPath(
+      schema.domain,
+      'api-domain-application'
+    ),
     tags: setTags(domain.name, 'nest', 'api-domain-application'),
-    standaloneConfig: true
+    standaloneConfig: true,
   });
 
   await libraryGenerator(tree, {
     name: 'services',
     directory: `${directory}/api`,
-    importPath: getDomainProjectImportPath(schema.domain, 'api-domain-services'),
+    importPath: getDomainProjectImportPath(
+      schema.domain,
+      'api-domain-services'
+    ),
     tags: setTags(domain.name, 'nest', 'api-domain-services'),
-    standaloneConfig: true
+    standaloneConfig: true,
   });
 
   await formatFiles(tree);

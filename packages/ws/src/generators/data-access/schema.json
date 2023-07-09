@@ -1,6 +1,5 @@
 {
   "$schema": "http://json-schema.org/schema",
-  "cli": "nx",
   "$id": "data-access",
   "type": "object",
   "properties": {
@@ -14,20 +13,28 @@
       }
     },
     "type": {
-       "description": "The type of library, api or ui",
-       "type": "string",
-       "default": "ui",
-       "enum": ["api", "ui"],
-       "x-prompt": "Type of data-access library (api or ui)?",
-       "items": [
-          {
-            "value": "api", "label": "api"
-          },
-          {
-            "value": "ui", "label": "ui"
-          }
-       ]
+      "description": "The type of library, api or ui",
+      "type": "string",
+      "default": "ui",
+      "enum": [
+        "api",
+        "ui"
+      ],
+      "x-prompt": "Type of data-access library (api or ui)?",
+      "items": [
+        {
+          "value": "api",
+          "label": "api"
+        },
+        {
+          "value": "ui",
+          "label": "ui"
+        }
+      ]
     }
   },
-  "required": ["domain", "type"]
+  "required": [
+    "domain",
+    "type"
+  ]
 }
