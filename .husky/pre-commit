@@ -1,0 +1,7 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+npx lint-staged
+npx nx affected:lint --parallel=2
+# npm run affected:test --parallel=2
+npx nx affected:build --parallel=2
