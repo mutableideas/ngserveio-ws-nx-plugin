@@ -8,7 +8,6 @@ import {
   setTags,
   updateSourceFiles,
   domainDirectory,
-  getDomainProjectByLibrary,
   getDomainProjectImportPath,
 } from '../utilities';
 import { IApiFeatureSchema } from './api-feature-schema.interface';

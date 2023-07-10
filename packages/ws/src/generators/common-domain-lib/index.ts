@@ -1,10 +1,9 @@
-import { Tree, formatFiles } from '@nx/devkit';
-import { libraryGenerator } from '@nx/workspace/generators';
+import { Tree, formatFiles } from '@nx/devkit'
+import { libraryGenerator } from '@nx/node';
 import { IDomainProject } from '../models';
 import {
   dasherize,
   domainDirectory,
-  getCommonImportPath,
   getCommonProjectByDomain,
   getDomainProjectImportPath,
   getDomainProjectNames,
@@ -28,6 +27,7 @@ export default async function commonDomainLibGenerator(
   }
 
   await libraryGenerator(tree, {
+    compiler: 'tsc',
     name: 'common',
     directory,
     importPath: getDomainProjectImportPath(schema.domain, 'lib', 'common'),
